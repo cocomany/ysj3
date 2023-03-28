@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>受密码保护的页面</title>
+  <style>
+    #iframe-container iframe {
+      border: none;
+      width: 100%;
+      height: 100%;
+    }
+  </style>
+  <script>
+    function checkPassword(e) {
+      if (e.keyCode === 13) { // 按下回车键
+        const passwordInput = document.getElementById('password');
+        const iframeContainer = document.getElementById('iframe-container');
+        const correctPassword = 'ysj3';
+
+        if (passwordInput.value === correctPassword) {
+          passwordInput.style.display = 'none';
+          document.querySelector('button').style.display = 'none';
+          iframeContainer.innerHTML = '<iframe src="http://yueshanji.sofasay.com" frameborder="0" allowfullscreen style="position:absolute; top:0; left:0; width:100%; height:100%;border:none"></iframe>';
+        } else {
+          alert('密码错误，请重新输入！');
+        }
+      }
+    }
+  </script>
+</head>
+<body>
+  <input type="password" id="password" placeholder="请输入密码" onkeydown="checkPassword(event)">
+  <button onclick="checkPassword(event)">提交</button>
+  <div id="iframe-container"></div>
+</body>
+</html>
